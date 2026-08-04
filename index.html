@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reinventarea Sinelui — Provocare de 15 zile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d0b12;
+    --bg2:#14101c;
+    --card:#1a1522;
+    --card-line:#2d2438;
+    --gold:#d9b57e;
+    --gold-soft:#e7cfa3;
+    --rose:#d98aa3;
+    --rose-deep:#b25f7c;
+    --text:#ece7f0;
+    --muted:#9d94ac;
+    --serif:"Cormorant Garamond",Georgia,serif;
+    --sans:"Jost","Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    font-weight:300;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px;}
+
+  /* glow accents */
+  .glow{position:absolute;border-radius:50%;filter:blur(90px);opacity:.5;z-index:0;pointer-events:none;}
+
+  h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.12;letter-spacing:.3px;}
+  .eyebrow{
+    font-family:var(--sans);font-weight:500;font-size:.72rem;letter-spacing:4px;
+    text-transform:uppercase;color:var(--gold);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;text-align:center;padding:96px 0 70px;overflow:hidden;
+    background:radial-gradient(120% 90% at 50% -10%, #241a30 0%, var(--bg) 60%);}
+  .hero .glow.g1{width:420px;height:420px;background:#6b2f52;top:-140px;left:-80px;}
+  .hero .glow.g2{width:380px;height:380px;background:#3b2b64;top:-100px;right:-90px;opacity:.4;}
+  .hero-inner{position:relative;z-index:1;}
+  .hero h1{font-size:clamp(3rem,9vw,5.6rem);margin:18px 0 6px;
+    background:linear-gradient(180deg,#fff 0%,var(--gold-soft) 120%);
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+  .hero .sub{font-family:var(--serif);font-style:italic;font-size:clamp(1.15rem,3.6vw,1.7rem);
+    color:var(--rose);margin-bottom:26px;}
+  .hero p.lead{max-width:560px;margin:0 auto 34px;color:var(--muted);font-size:1.02rem;}
+  .badges{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-top:38px;}
+  .badge{text-align:center;}
+  .badge b{display:block;font-family:var(--serif);font-size:2.1rem;color:var(--gold);line-height:1;}
+  .badge span{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);}
+
+  .btn{
+    display:inline-block;font-family:var(--sans);font-weight:500;letter-spacing:1.5px;
+    text-transform:uppercase;font-size:.82rem;text-decoration:none;
+    color:#1a1119;background:linear-gradient(100deg,var(--gold) 0%,var(--rose) 130%);
+    padding:17px 40px;border-radius:40px;transition:transform .2s ease,box-shadow .2s ease;
+    box-shadow:0 10px 30px -8px rgba(217,138,163,.55);
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 16px 40px -8px rgba(217,138,163,.7);}
+
+  /* ---------- SECTION ---------- */
+  section{position:relative;padding:76px 0;}
+  .sec-head{text-align:center;max-width:620px;margin:0 auto 54px;}
+  .sec-head h2{font-size:clamp(2.1rem,5.5vw,3.1rem);margin:12px 0 14px;}
+  .sec-head p{color:var(--muted);font-size:1.02rem;}
+  .divider{width:52px;height:2px;margin:0 auto;
+    background:linear-gradient(90deg,var(--gold),var(--rose));border-radius:2px;}
+
+  .intro{background:var(--bg2);}
+  .intro .quote{font-family:var(--serif);font-style:italic;font-size:clamp(1.5rem,4.5vw,2.3rem);
+    text-align:center;max-width:760px;margin:0 auto;color:var(--text);line-height:1.35;}
+  .intro .quote span{color:var(--gold);}
+
+  /* ---------- TIMELINE ---------- */
+  .phase-label{display:flex;align-items:center;gap:16px;margin:46px 0 22px;}
+  .phase-label:first-of-type{margin-top:0;}
+  .phase-label .pnum{font-family:var(--serif);font-size:.8rem;letter-spacing:3px;color:var(--gold);
+    text-transform:uppercase;white-space:nowrap;}
+  .phase-label h3{font-size:1.5rem;color:var(--rose);font-style:italic;white-space:nowrap;}
+  .phase-label .line{flex:1;height:1px;background:linear-gradient(90deg,var(--card-line),transparent);}
+
+  .timeline{position:relative;padding-left:8px;}
+  .tl-line{position:absolute;left:26px;top:12px;bottom:12px;width:2px;
+    background:linear-gradient(180deg,var(--gold) 0%,var(--rose) 50%,var(--rose-deep) 100%);opacity:.5;}
+  .day{position:relative;display:flex;gap:22px;align-items:flex-start;padding:12px 0;}
+  .dot{
+    position:relative;z-index:2;flex-shrink:0;width:52px;height:52px;border-radius:50%;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    background:var(--card);border:1.5px solid var(--gold);color:var(--gold-soft);
+    box-shadow:0 0 0 6px var(--bg);
+  }
+  .dot b{font-family:var(--serif);font-size:1.35rem;line-height:.9;}
+  .dot span{font-size:.5rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-top:1px;}
+  .day-body{
+    flex:1;background:var(--card);border:1px solid var(--card-line);border-radius:14px;
+    padding:16px 20px;transition:border-color .2s ease,transform .2s ease;
+  }
+  .day:hover .day-body{border-color:var(--rose);transform:translateX(4px);}
+  .day-body .dlabel{font-size:.68rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:3px;}
+  .day-body h4{font-family:var(--serif);font-weight:500;font-size:1.4rem;line-height:1.2;color:var(--text);}
+
+  /* ---------- PRICING ---------- */
+  .pricing{background:radial-gradient(120% 100% at 50% 0%, #211730 0%, var(--bg) 65%);text-align:center;}
+  .price-card{
+    position:relative;z-index:1;max-width:440px;margin:0 auto;background:var(--card);
+    border:1px solid var(--card-line);border-radius:22px;padding:44px 36px;
+    box-shadow:0 30px 70px -30px rgba(0,0,0,.8);
+  }
+  .price-card .tag{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--rose);}
+  .price-card .old{font-family:var(--serif);font-size:1.6rem;color:var(--muted);text-decoration:line-through;
+    text-decoration-color:var(--rose-deep);margin-top:14px;}
+  .price-card .now{font-family:var(--serif);font-size:4.6rem;line-height:1;color:var(--gold);margin:2px 0 4px;}
+  .price-card .now small{font-size:1.6rem;color:var(--gold-soft);}
+  .price-card .save{display:inline-block;margin:6px 0 26px;font-size:.78rem;letter-spacing:1px;
+    color:var(--gold-soft);background:rgba(217,181,126,.12);border:1px solid rgba(217,181,126,.35);
+    padding:6px 16px;border-radius:30px;}
+  .price-card ul{list-style:none;text-align:left;margin:0 auto 30px;max-width:300px;}
+  .price-card li{position:relative;padding:7px 0 7px 28px;color:var(--text);font-size:.96rem;border-bottom:1px solid var(--card-line);}
+  .price-card li:last-child{border-bottom:none;}
+  .price-card li::before{content:"✦";position:absolute;left:0;color:var(--rose);font-size:.85rem;top:9px;}
+  .guarantee{margin-top:20px;color:var(--muted);font-size:.82rem;font-style:italic;font-family:var(--serif);}
+
+  /* ---------- CLOSING ---------- */
+  .closing{text-align:center;background:var(--bg2);}
+  .closing h2{font-size:clamp(2rem,5.5vw,3rem);margin-bottom:20px;}
+  .closing p{color:var(--muted);max-width:520px;margin:0 auto 34px;}
+
+  footer{text-align:center;padding:40px 0;color:var(--muted);font-size:.8rem;border-top:1px solid var(--card-line);}
+  footer .fmark{font-family:var(--serif);font-style:italic;color:var(--gold);font-size:1.1rem;}
+
+  @media(max-width:560px){
+    .dot{width:46px;height:46px;}
+    .tl-line{left:23px;}
+    .day-body h4{font-size:1.2rem;}
+    .phase-label h3{font-size:1.2rem;}
+  }
+</style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <span class="glow g1"></span><span class="glow g2"></span>
+    <div class="wrap hero-inner">
+      <span class="eyebrow">Provocare de 15 zile</span>
+      <h1>Reinventarea Sinelui</h1>
+      <p class="sub">Nu îți schimbi viața. Îți schimbi identitatea.</p>
+      <p class="lead">Cincisprezece zile de transformare ghidată — pas cu pas, îți eliberezi vechea versiune și devii persoana pe care ai știut mereu că o poți fi.</p>
+      <a href="#pret" class="btn">Începe transformarea</a>
+      <div class="badges">
+        <div class="badge"><b>15</b><span>Zile</span></div>
+        <div class="badge"><b>3</b><span>Etape</span></div>
+        <div class="badge"><b>1</b><span>Nou tu</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- INTRO -->
+  <section class="intro">
+    <div class="wrap">
+      <p class="quote">Nu te-ai născut ca să te <span>micșorezi</span>. Te-ai născut ca să te <span>reinventezi</span> — și totul începe din interior.</p>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section id="program">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="divider"></div>
+        <h2>Călătoria ta, zi cu zi</h2>
+        <p>Fiecare zi construiește pe cea anterioară. Iată exact ce te așteaptă în cele 15 zile.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-line"></div>
+
+        <!-- ETAPA 1 -->
+        <div class="phase-label">
+          <span class="pnum">Etapa I</span>
+          <h3>Eliberarea</h3>
+          <span class="line"></span>
+        </div>
+
+        <div class="day"><div class="dot"><b>1</b><span>Zi</span></div><div class="day-body"><div class="dlabel">Ziua 1</div><h4>Ia o decizie</h4></div></div>
+        <div class="day"><div class="dot"><b>2</b><span>Zi</span></div><div class="day-body"><div class="dlabel">Ziua 2</div><h4>Conștientizarea versiunii actuale</h4></div></div>
+        <div class="day"><div class="dot"><b>3</b><span>Zi</span></div><div class="day-body"><div class="dlabel">Ziua 3</div><h4>Eliberează vechea versiune</h4></div></div>
+        <div class="day"><div class="dot"><b>4</b><span>Zi</span></div><div class="day-body"><div class="dlabel">Ziua 4</div><h4>Rescrierea poveștilor</h4></div></div>
+        <div class="day"><div class="dot"><b>5</b><span>Zi</span></div><div class="day-body"><div class="dlabel">Ziua 5</div><h4>Creează noua versiune a ta</h4></div></div>
+
+        <!-- ETAPA 2 -->
+        <div class="phase-label">
+          <span class="pnum">Etapa II</span>
+          <h3>Reconstrucția</h3>
+          <span class="line"></span>
+        </div>
+
+        <div class="day"><div class="dot"><b>6</b><span>Zi</span></div><div class="day-body"><div class="dlabel">Ziua 6</div><h4>Obiceiurile, gândurile și rutinele noului tău sine</h4></div></div>
+        <div class="day"><div class="dot"><b>7</b><span>Zi</span></div><div class="day-body"><div class="dlabel">Ziua 7</div><h4>Eliminarea îndoielii față de noua versiune</h4></div></div>
+        <div class="day"><div class="dot"><b>8</b><span>Zi</span></div><div class="day-body"><div class="dlabel">Ziua 8</div><h4>Sistemul nervos și noul tu</h4></div></div>
+        <div class="day"><div class="dot"><b>9</b><span>Zi</span></div><div class="day-body"><div class="dlabel">Ziua 9</div><h4>Activarea încrederii</h4></div></div>
+        <div class="day"><div class="dot"><b>10</b><span>Zi</span></div><div class="day-body"><div class="dlabel">Ziua 10</div><h4>Fii îndrăzneț</h4></div></div>
+
+        <!-- ETAPA 3 -->
+        <div class="phase-label">
+          <span class="pnum">Etapa III</span>
+          <h3>Activarea</h3>
+          <span class="line"></span>
+        </div>
+
+        <div class="day"><div class="dot"><b>11</b><span>Zi</span></div><div class="day-body"><div class="dlabel">Ziua 11</div><h4>Accesarea noii tale frecvențe</h4></div></div>
+        <div class="day"><div class="dot"><b>12</b><span>Zi</span></div><div class="day-body"><div class="dlabel">Ziua 12</div><h4>Practica energetică pentru noul tu</h4></div></div>
+        <div class="day"><div class="dot"><b>13</b><span>Zi</span></div><div class="day-body"><div class="dlabel">Ziua 13</div><h4>Atracția magnetică</h4></div></div>
+        <div class="day"><div class="dot"><b>14</b><span>Zi</span></div><div class="day-body"><div class="dlabel">Ziua 14</div><h4>Exprimă-te fără rușine</h4></div></div>
+        <div class="day"><div class="dot"><b>15</b><span>Zi</span></div><div class="day-body"><div class="dlabel">Ziua 15</div><h4>Sărbătorește noua ta versiune</h4></div></div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing" id="pret">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="divider"></div>
+        <h2>Investește în noul tu</h2>
+        <p>Un preț mai mic decât o cină în oraș — pentru o transformare care rămâne.</p>
+      </div>
+      <div class="price-card">
+        <div class="tag">Ofertă de lansare</div>
+        <div class="old">50 €</div>
+        <div class="now">30<small> €</small></div>
+        <span class="save">Economisești 20 € — 40% reducere</span>
+        <ul>
+          <li>15 zile de transformare ghidată</li>
+          <li>Exerciții zilnice pas cu pas</li>
+          <li>3 etape: eliberare, reconstrucție, activare</li>
+          <li>Acces pe viață la material</li>
+        </ul>
+        <a href="https://www.paypal.com/ncp/payment/GVG3WUAYT5NK8" target="_blank" rel="noopener" class="btn">Vreau reinventarea — 30 €</a>
+        <p class="guarantee">Începe azi. Devino, în 15 zile, cine ai fost mereu.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing">
+    <div class="wrap">
+      <h2>Versiunea ta viitoare te așteaptă</h2>
+      <p>Peste 15 zile poți fi exact acolo unde ești acum — sau poți fi de nerecunoscut. Alegerea începe cu o decizie.</p>
+      <a href="https://www.paypal.com/ncp/payment/GVG3WUAYT5NK8" target="_blank" rel="noopener" class="btn">Da, sunt gata — 30 €</a>
+    </div>
+  </section>
+
+  <footer>
+    <p class="fmark">Reinventarea Sinelui</p>
+    <p style="margin-top:8px;">© 2026 · Toate drepturile rezervate</p>
+  </footer>
+
+</body>
+</html>
